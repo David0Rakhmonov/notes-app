@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать заметку</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Редактирование заметки</h1>
+        <nav>
+            <ul>
+                <li><a href="/notes">Назад к заметкам</a></li>
+                <li><a href="/logout">Выход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="/edit-note/{{.ID}}" method="POST">
+            <label for="title">Заголовок</label>
+            <input type="text" id="title" name="title" value="{{.Title}}" required>
+            
+            <label for="content">Содержание</label>
+            <textarea id="content" name="content" rows="10" required>{{.Content}}</textarea>
+            
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Notes App</p>
+    </footer>
+</body>
+</html>

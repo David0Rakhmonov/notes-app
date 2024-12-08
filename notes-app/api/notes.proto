@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package notes;
+
+option go_package = "./internal/notes;notes";  // Добавляем go_package
+
+service NotesService {
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Logout (LogoutRequest) returns (LogoutResponse);
+    rpc CreateNote (CreateNoteRequest) returns (NoteResponse);
+    rpc UpdateNote (UpdateNoteRequest) returns (NoteResponse);
+    rpc DeleteNote (DeleteNoteRequest) returns (EmptyResponse);
+    rpc ListNotes (ListNotesRequest) returns (ListNotesResponse);
+}
+
+message RegisterRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message RegisterResponse {
+    string message = 1;
+}
+
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string token = 1;
+}
+
+message LogoutRequest {
+    string token = 1;
+}
+
+message LogoutResponse {
+    string message = 1;
+}
+
+message CreateNoteRequest {
+    string title = 1;
+    string content = 2;
+    string token = 3;
+}
+
+message UpdateNoteRequest {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+    string token = 4;
+}
+
+message DeleteNoteRequest {
+    int32 id = 1;
+    string token = 2;
+}
+
+message NoteResponse {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message ListNotesRequest {
+    string token = 1;
+}
+
+message ListNotesResponse {
+    repeated NoteResponse notes = 1;
+}
+
+message EmptyResponse {}
